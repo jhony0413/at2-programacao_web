@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce NomeLoja</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            color: rgb(17, 17, 17);
+            background: rgb(255, 255, 255);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgb(17, 17, 17);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .cartao {
+            border: 1px solid rgb(17, 17, 17);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        button {
+            cursor: pointer;
+            background: rgb(238, 238, 238);
+            border: 1px solid rgb(17, 17, 17);
+            padding: 8px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: rgb(204, 204, 204);
+        }
+
+        .carrinho-info {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>NomeLoja</h1>
+        <div>
+            <input type="search" id="campoBusca" placeholder="Pesquisar produto...">
+            <span class="carrinho-info">🛒 Carrinho: <span id="contadorCarrinho">0</span> itens</span>
+        </div>
+    </header>
+
+    <main>
+        <h2>Produtos Disponíveis</h2>
+        <section class="produtos" id="gradeProdutos"></section>
+    </main>
+
+    <script>
+
+        const produtos = [
+            { id: "1", nome: "Notebook Pro", preco: 3200, estoque: 4 },
+            { id: "2", nome: "Teclado Mecânico", preco: 350, estoque: 8 },
+            { id: "3", nome: "Mouse Gamer", preco: 180, estoque: 12 },
+            { id: "4", nome: "Headset Gamer", preco: 400, estoque: 2 }
+        ];
+
+        let carrinho = [];
+
+        const gradeProdutos = document.getElementById("gradeProdutos");
+        const contadorCarrinho = document.getElementById("contadorCarrinho");
+        const campoBusca = document.getElementById("campoBusca");
+
+        function renderizarProdutos(filtro = "") {
+            gradeProdutos.innerHTML = "";
+
+            const filtrados = produtos.filter(p => p.nome.toLowerCase().includes(filtro.toLowerCase()));
+
+            if (filtrados.length === 0) {
+                gradeProdutos.innerHTML = "<p>Nenhum produto encontrado.</p>";
+                return;
+            }
+
+            filtrados.forEach(produto => {
+                const cartao = document.createElement("div");
+                cartao.className = "cartao";
+                cartao.innerHTML = `
+          <div>
+            <h3>${produto.nome}</h3>
+            <p>R$ ${produto.preco.toFixed(2)}</p>
+            <p style="font-size: 0.85rem; color: #555;">Estoque: ${produto.estoque}</p>
+          </div>
+          <button onclick="adicionarAoCarrinho('${produto.id}')">Adicionar</button>
+        `;
+                gradeProdutos.appendChild(cartao);
+            });
+        }
+
+        function adicionarAoCarrinho(id) {
+            const produto = produtos.find(p => p.id === id);
+            if (!produto || produto.estoque <= 0) {
+                alert("Produto indisponível!");
+                return;
+            }
+
+            const itemNoCarrinho = carrinho.find(item => item.id === id);
+            if (itemNoCarrinho) {
+                if (itemNoCarrinho.qtd < produto.estoque) {
+                    itemNoCarrinho.qtd++;
+                } else {
+                    alert("Estoque máximo atingido!");
+                    return;
+                }
+            } else {
+                carrinho.push({ id: produto.id, nome: produto.nome, preco: produto.preco, qtd: 1 });
+            }
+
+            atualizarCarrinho();
+        }
+
+        function atualizarCarrinho() {
+            const totalItens = carrinho.reduce((soma, item) => soma + item.qtd, 0);
+            contadorCarrinho.textContent = totalItens;
+        }
+
+        campoBusca.addEventListener("input", (e) => {
+            renderizarProdutos(e.target.value);
+        });
+
+        renderizarProdutos();
+    </script>
+
+</body>
+
+</html>
