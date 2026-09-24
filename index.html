@@ -1,277 +1,83 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>E-commerce NomeLoja</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Times New Roman', Times, serif;
-      padding: 20px;
-      color: rgb(0, 0, 0);
-      background: rgb(255, 255, 255);
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid rgb(0, 0, 0);
-      padding-bottom: 15px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .pesquisa input {
-      padding: 6px;
-      border: 1px solid rgb(0, 0, 0);
-      width: 220px;
-    }
-
-    .categorias {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      overflow-x: auto;
-    }
-
-    .categoria {
-      background: rgb(255, 255, 255);
-      border: 1px solid rgb(0, 0, 0);
-      padding: 6px 12px;
-      cursor: pointer;
-    }
-
-    .categoria.ativa {
-      background: rgb(0, 0, 0);
-      color: rgb(255, 255, 255);
-    }
-
-    .produtos {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .cartao {
-      border: 1px solid rgb(0, 0, 0);
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .imagem-produto {
-      height: 130px;
-      background: rgb(235, 235, 235);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      color: rgb(102, 102, 102);
-    }
-
-    button {
-      cursor: pointer;
-      background: rgb(235, 235, 235);
-      border: 1px solid rgb(0, 0, 0);
-      padding: 8px;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background: rgb(204, 204, 204);
-    }
-
-    .botao-carrinho {
-      position: relative;
-    }
-
-    .contador {
-      background: rgb(255, 0, 0);
-      color: rgb(255, 255, 255);
-      border-radius: 50%;
-      padding: 0 5px;
-      font-size: 0.8rem;
-    }
-
-    .carrinho-gaveta {
-      position: fixed;
-      right: 0;
-      top: 0;
-      width: 320px;
-      height: 100%;
-      background: rgb(255, 255, 255);
-      border-left: 2px solid rgb(0, 0, 0);
-      padding: 20px;
-      display: none;
-      flex-direction: column;
-      z-index: 10;
-    }
-
-    .carrinho-gaveta.aberta {
-      display: flex;
-    }
-
-    .lista-itens {
-      flex: 1;
-      overflow-y: auto;
-      margin-top: 10px;
-    }
-
-    .item-carrinho {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgb(225, 225, 225);
-      padding-bottom: 8px;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-  <header>
-    <h1>E-COMMERCE NOMELOJA</h1>
-    <div class="pesquisa">
-      <input type="search" id="campoPesquisa" placeholder="Pesquisar produto...">
-    </div>
-    <button class="botao-carrinho" id="botaoAbrirCarrinho">
-      🛒 Carrinho <span class="contador" id="contadorCarrinho">0</span>
-    </button>
+  <header class="cabecalho">
+    <nav class="navegacao">
+      <a class="logotipo" href="#" aria-label="E-commerce NomeLoja">
+        <span class="marca-logotipo">E-COMMERCE</span><span>NOMELOJA</span>
+      </a>
+      <div class="pesquisa">
+        <span class="icone-pesquisa">⌕</span>
+        <input id="campoPesquisa" type="search" placeholder="Pesquisar produto..." autocomplete="off">
+      </div>
+      <button class="botao-carrinho" id="botaoAbrirCarrinho" aria-label="Abrir carrinho">
+        🛒
+        <span class="rotulo-carrinho">Carrinho</span>
+        <span class="contador-carrinho" id="contadorCarrinho">0</span>
+      </button>
+    </nav>
   </header>
-
   <main>
-    <div class="categorias" id="listaCategorias"></div>
-    <section class="produtos" id="gradeProdutos"></section>
+    <section class="secao-destaque">
+      <div class="cartao-destaque">
+        <span class="etiqueta">TECNOLOGIA • GAMES • ACESSÓRIOS</span>
+        <h1>Tecnologia para subir de level.</h1>
+        <p>Encontre produtos para produtividade, entretenimento e seu setup. Consulte estoque, escolha a quantidade e
+          finalize sua compra de forma simples.</p>
+        <div class="acoes-destaque">
+          <button class="botao-primario" id="botaoVerProdutos">Ver produtos</button>
+          <button class="botao-secundario" id="botaoCarrinhoDestaque">Abrir carrinho</button>
+        </div>
+      </div>
+    </section>
+    <section class="conteiner" id="catalogoProdutos">
+      <div class="barra-ferramentas">
+        <div>
+          <h2>Produtos disponíveis</h2>
+          <p style="color:rgb(105, 115, 125); font-size: 0.9rem">Escolha uma categoria ou pesquise pelo nome.</p>
+        </div>
+        <div class="categorias" id="listaCategorias"></div>
+      </div>
+      <div class="produtos" id="gradeProdutos"></div>
+    </section>
   </main>
-
-  <aside class="carrinho-gaveta" id="gavetaCarrinho">
-    <h2>Seu Carrinho</h2>
-    <div class="lista-itens" id="listaItensCarrinho"></div>
-    <div style="border-top: 2px solid rgb(0, 0, 0); padding-top: 10px; margin-top: 10px;">
-      <p><strong>Subtotal: </strong><span id="valorSubtotal">R$ 0,00</span></p>
-      <button style="width: 100%; background: rgb(0, 0, 0); color: rgb(255, 255, 255);" id="botaoFecharCarrinho">Fechar Carrinho</button>
+  <footer class="rodape">E-commerce NomeLoja • Projeto acadêmico de Ciência da Computação na disciplina de Programação
+    Web • Compra meramente simulada</footer>
+  <div class="sobreposicao" id="fundoSobreposicaoCarrinho">
+    <aside class="gaveta">
+      <div class="cabecalho-gaveta">
+        <div>
+          <h2>Seu carrinho</h2>
+          <p id="subtituloCarrinho" style="color:rgb(105, 115, 125); font-size: 0.84rem">0 itens</p>
+        </div>
+        <button class="botao-fechar" id="botaoFecharCarrinho" aria-label="Fechar carrinho">×</button>
+      </div>
+      <div class="itens-carrinho" id="listaItensCarrinho"></div>
+      <div class="resumo-valores">
+        <div class="linha-resumo"><span>Itens</span><strong id="quantidadeTotalItens">0</strong></div>
+        <div class="linha-resumo"><span>Subtotal</span><strong id="valorSubtotal">R$ 0,00</strong></div>
+        <div class="linha-resumo desconto"><span>Desconto</span><strong id="valorDesconto">R$ 0,00</strong></div>
+        <div class="linha-resumo total"><span>Total</span><strong id="valorTotalFinal">R$ 0,00</strong></div>
+        <button class="botao-finalizar" id="botaoFinalizarCompra">Finalizar compra</button>
+      </div>
+    </aside>
+  </div>
+  <div class="modulo" id="moduloFinalizacaoCompra">
+    <div class="caixa-modulo">
+      <div class="cabecalho-modulo">
+        <h2>Resumo da compra</h2>
+        <button class="botao-fechar" id="botaoFecharModulo">×</button>
+      </div>
+      <div id="conteudoModuloFinalizacao"></div>
     </div>
-  </aside>
-
-  <script>
-    const dinheiro = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
-
-    const produtos = [
-      { id: "1", nome: "Notebook NovaBook Pro", categoria: "Informática", preco: 3299.90, estoque: 5 },
-      { id: "2", nome: "Teclado Mecânico RGB", categoria: "Acessórios", preco: 349.90, estoque: 8 },
-      { id: "3", nome: "Mouse Gamer Pulse", categoria: "Games", preco: 189.90, estoque: 12 },
-      { id: "4", nome: "Headset SoundMax", categoria: "Games", preco: 429.90, estoque: 3 },
-      { id: "5", nome: "Monitor UltraView 27\"", categoria: "Informática", preco: 1399.90, estoque: 2 }
-    ];
-
-    let carrinho = [];
-    let categoriaAtual = "Todos";
-    const categorias = ["Todos", ...new Set(produtos.map(p => p.categoria))];
-
-    const gradeProdutos = document.getElementById("gradeProdutos");
-    const listaCategorias = document.getElementById("listaCategorias");
-    const campoPesquisa = document.getElementById("campoPesquisa");
-    const contadorCarrinho = document.getElementById("contadorCarrinho");
-    const gavetaCarrinho = document.getElementById("gavetaCarrinho");
-    const listaItensCarrinho = document.getElementById("listaItensCarrinho");
-    const valorSubtotal = document.getElementById("valorSubtotal");
-
-    function renderizarCategorias() {
-      listaCategorias.innerHTML = "";
-      categorias.forEach(cat => {
-        const btn = document.createElement("button");
-        btn.className = "categoria" + (cat === categoriaAtual ? " ativa" : "");
-        btn.textContent = cat;
-        btn.addEventListener("click", () => {
-          categoriaAtual = cat;
-          renderizarCategorias();
-          renderizarProdutos();
-        });
-        listaCategorias.appendChild(btn);
-      });
-    }
-
-    function renderizarProdutos() {
-      const busca = campoPesquisa.value.toLowerCase();
-      const filtrados = produtos.filter(p => {
-        const matchCat = categoriaAtual === "Todos" || p.categoria === categoriaAtual;
-        const matchBusca = p.nome.toLowerCase().includes(busca);
-        return matchCat && matchBusca;
-      });
-
-      gradeProdutos.innerHTML = "";
-      if (filtrados.length === 0) {
-        gradeProdutos.innerHTML = "<p>Nenhum produto encontrado.</p>";
-        return;
-      }
-
-      filtrados.forEach(p => {
-        const cartao = document.createElement("article");
-        cartao.className = "cartao";
-        cartao.innerHTML = `
-          <div>
-            <div class="imagem-produto">Foto Produto</div>
-            <span style="font-size: 0.75rem; color: #666;">${p.categoria}</span>
-            <h3>${p.nome}</h3>
-            <p style="margin-top: 5px;"><strong>${dinheiro.format(p.preco)}</strong></p>
-            <p style="font-size: 0.8rem; color: ${p.estoque <= 3 ? '#c00' : '#080'};">Estoque: ${p.estoque}</p>
-          </div>
-          <button onclick="adicionar('${p.id}')" ${p.estoque === 0 ? 'disabled' : ''}>Adicionar</button>
-        `;
-        gradeProdutos.appendChild(cartao);
-      });
-    }
-
-    function adicionar(id) {
-      const prod = produtos.find(p => p.id === id);
-      const item = carrinho.find(i => i.id === id);
-
-      if (item) {
-        if (item.qtd < prod.estoque) item.qtd++;
-        else { alert("Estoque máximo atingido!"); return; }
-      } else {
-        carrinho.push({ id: prod.id, nome: prod.nome, preco: prod.preco, qtd: 1 });
-      }
-      atualizarCarrinho();
-    }
-
-    function atualizarCarrinho() {
-      const totalQtd = carrinho.reduce((acc, item) => acc + item.qtd, 0);
-      const subtotal = carrinho.reduce((acc, item) => acc + (item.preco * item.qtd), 0);
-
-      contadorCarrinho.textContent = totalQtd;
-      valorSubtotal.textContent = dinheiro.format(subtotal);
-
-      listaItensCarrinho.innerHTML = "";
-      carrinho.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "item-carrinho";
-        div.innerHTML = `<span>${item.nome} (x${item.qtd})</span> <strong>${dinheiro.format(item.preco * item.qtd)}</strong>`;
-        listaItensCarrinho.appendChild(div);
-      });
-    }
-
-    document.getElementById("botaoAbrirCarrinho").addEventListener("click", () => gavetaCarrinho.classList.add("aberta"));
-    document.getElementById("botaoFecharCarrinho").addEventListener("click", () => gavetaCarrinho.classList.remove("aberta"));
-    campoPesquisa.addEventListener("input", renderizarProdutos);
-
-    renderizarCategorias();
-    renderizarProdutos();
-  </script>
+  </div>
+  <div class="notificacao" id="elementoNotificacao"></div>
+  <script src="script.js"></script>
 </body>
-
 </html>
