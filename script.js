@@ -309,7 +309,7 @@ function processarFinalizacaoCompra() {
             `<div class="mensagem-sucesso">
           <div class="icone-sucesso">✓</div>
          <h2>Compra concluída com sucesso!</h2>
-          <p style="color: rgb(105, 115, 125); margin-top: 8px">Esta é uma finalização simulada. Obrigado por comprar na TechNova Store.</p>
+          <p style="color: rgb(105, 115, 125); margin-top: 8px">Esta é uma finalização simulada. Obrigado por comprar na NomeLoja.</p>
           <button class="botao-finalizar" id="botaoVoltarLoja">Voltar à loja</button>
         </div>`;
         document.getElementById("botaoVoltarLoja").addEventListener("click", () => {
