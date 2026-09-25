@@ -91,14 +91,14 @@ class Carrinho {
 }
 
 const produtos = [
-    new Produto("PROD001", "Notebook Novabook", "Informática", 3299.90, 5, "ilu1.png"),
-    new Produto("PROD002", "Teclado Mecânico RGB", "Acessórios", 349.90, 8, "ilu2.png"),
-    new Produto("PROD003", "Mouse Gamer Pulse", "Gamer", 189.90, 12, "ilu3.png"),
-    new Produto("PROD004", "Headset SoundMax", "Gamer", 429.90, 3, "ilu4.png"),
-    new Produto("PROD005", "Monitor UltraView 27\"", "Informática", 1399.90, 2, "ilu5.png"),
-    new Produto("PROD006", "Webcam Vision HD", "Acessórios", 249.90, 0, "ilu6.png"),
-    new Produto("PROD007", "Controle GamePad X", "Gamer", 299.90, 6, "ilu7.png"),
-    new Produto("PROD008", "SSD Flash 1TB", "Informática", 499.90, 7, "ilu8.png")
+    new Produto("PROD001", "Notebook Novabook", "Informática", 3299.90, 5, "imagens/ilu1.png"),
+    new Produto("PROD002", "Teclado Mecânico RGB", "Acessórios", 349.90, 8, "imagens/ilu2.png"),
+    new Produto("PROD003", "Mouse Gamer Pulse", "Gamer", 189.90, 12, "imagens/ilu3.png"),
+    new Produto("PROD004", "Headset SoundMax", "Gamer", 429.90, 3, "imagens/ilu4.png"),
+    new Produto("PROD005", "Monitor UltraView 27\"", "Informática", 1399.90, 2, "imagens/ilu5.png"),
+    new Produto("PROD006", "Webcam Vision HD", "Acessórios", 249.90, 0, "imagens/ilu6.png"),
+    new Produto("PROD007", "Controle GamePad X", "Gamer", 299.90, 6, "imagens/ilu7.png"),
+    new Produto("PROD008", "SSD Flash 1TB", "Informática", 499.90, 7, "imagens/ilu8.png")
 ];
 const carrinho = new Carrinho();
 const produtosElemento = document.getElementById("gradeProdutos");
