@@ -29,7 +29,7 @@ npm install
 2. Configure as variáveis de ambiente copiando o arquivo de exemplo e preenchendo os dados locais:
 
 ```bash
-cp .env.example .env
+cp env.example .env
 ```
 
 3. Crie o banco de dados e popule os registros iniciais no MySQL:
