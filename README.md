@@ -4,12 +4,14 @@ Aplicação Web full-stack para simulação de loja virtual de tecnologia, games
 
 ## Estrutura do projeto
 
-* `server.js`: servidor Express, autenticação/sessão, regras de negócio e transações no MySQL.
-* `index.html`, `style.css`, `script.js`: interface da loja, catálogo, carrinho, histórico de pedidos e painel administrativo.
-* `ddl.sql`: criação do banco `rubigamer_db`, tabelas, chaves, relacionamentos e restrições.
-* `dml-carga_teste.sql`: carga inicial de usuários, categorias, produtos e movimentações de estoque.
-* `.env.example`: modelo de variáveis de ambiente sem credenciais reais.
-* `package.json`: dependências e scripts do projeto.
+- `server.js`: servidor Express, rotas da API, autenticação/sessão, regras de negócio, transações no MySQL e servidor de arquivos estáticos da pasta `public/`.
+- `public/`: diretório público servido pelo Express contendo os recursos do front-end:
+- `public/index.html`, `public/style.css`, `public/script.js`: interface da loja, catálogo, carrinho, histórico de pedidos e painel administrativo.
+- `public/imagens/`: imagens dos produtos exibidos no catálogo e na pré-visualização administrativa.
+- `ddl.sql`: criação do banco `rubigamer_db`, tabelas, chaves, relacionamentos e restrições.
+- `dml-carga_teste.sql`: carga inicial de usuários, categorias, produtos e movimentações de estoque.
+- `.env.example`: modelo de variáveis de ambiente sem credenciais reais.
+- `package.json`: dependências e scripts do projeto.
 
 ## Pré-requisitos
 
@@ -48,4 +50,4 @@ npm start
 ## Credenciais de demonstração
 
 * **Administrador:** `admin@rubigamer.com` / `Admin123!`
-* **Cliente:** `cliente@rubigamer.com` / `cliente123!`
+* **Cliente:** `cliente@rubigamer.com` / `Cliente123!`

@@ -14,7 +14,6 @@ const pool = mysql.createPool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME || 'rubigamer_db',
     waitForConnections: true,
-    connectionLimit: 10
 });
 
 app.use(express.json());
@@ -28,7 +27,7 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 4
     }
 }));
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
 
 function exigirAutenticacao(req, res, next) {
     if (!req.session || !req.session.usuario) {

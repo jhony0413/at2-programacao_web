@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce RubiGamer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="cabecalho">
+        <nav class="navegacao">
+            <a class="logotipo" id="linkLogoCatalogo" href="#catalogoProdutos" aria-label="E-commerce RubiGamer">
+                <span class="marca-logotipo">E-COMMERCE</span><span>RubiGamer</span>
+            </a>
+            <div class="pesquisa">
+                <span class="icone-pesquisa">⌕</span>
+                <input id="campoPesquisa" type="search" placeholder="Pesquisar produto..." autocomplete="off">
+            </div>
+            <button class="botao-carrinho" id="botaoAbrirCarrinho" aria-label="Abrir carrinho">
+                🛒
+                <span class="rotulo-carrinho">Carrinho</span>
+                <span class="contador-carrinho" id="contadorCarrinho">0</span>
+            </button>
+            <div class="acoes-usuario" id="areaUsuario">
+                <span id="identificacaoUsuario">Visitante</span>
+                <button type="button" id="botaoAbrirLogin">Entrar</button>
+                <button type="button" id="botaoAbrirCadastro">Cadastrar</button>
+                <button type="button" id="botaoAbrirMeusPedidos" style="display: none;">Meus pedidos</button>
+                <button type="button" id="botaoAbrirPainelAdmin" style="display: none;">Painel Admin</button>
+                <button type="button" id="botaoLogout" style="display: none;">Sair</button>
+            </div>
+        </nav>
+        <div class="modulo" id="moduloAutenticacao">
+            <div class="caixa-modulo">
+                <div class="cabecalho-modulo">
+                    <h2 id="tituloModuloAuth">Entrar</h2>
+                    <button type="button" class="botao-fechar" id="botaoFecharAuth">×</button>
+                </div>
+                <form id="formularioAutenticacao">
+                    <div id="campoNomeCadastro" style="display: none;">
+                        <label for="inputNome">Nome completo</label>
+                        <input id="inputNome" type="text">
+                    </div>
+                    <div>
+                        <label for="inputEmail">E-mail</label>
+                        <input id="inputEmail" type="email" required>
+                    </div>
+                    <div>
+                        <label for="inputSenha">Senha</label>
+                        <input id="inputSenha" type="password" required>
+                    </div>
+                    <div id="campoConfirmacaoCadastro" style="display: none;">
+                        <label for="inputConfirmacaoSenha">Confirmar senha</label>
+                        <input id="inputConfirmacaoSenha" type="password">
+                    </div>
+                    <button type="submit" class="botao-finalizar" id="botaoSubmitAuth">Confirmar</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="secao-destaque">
+            <div class="cartao-destaque">
+                <span class="etiqueta">TECNOLOGIA • GAMES • ACESSÓRIOS</span>
+                <h1>Tecnologia para subir de level.</h1>
+                <p>Encontre produtos para produtividade, entretenimento e seu setup. Consulte estoque, escolha a quantidade e finalize sua compra de forma simples.</p>
+                <div class="acoes-destaque">
+                    <button class="botao-primario" id="botaoVerProdutos">Ver produtos</button>
+                    <button class="botao-secundario" id="botaoCarrinhoDestaque">Abrir carrinho</button>
+                </div>
+            </div>
+        </section>
+        <section class="conteiner" id="catalogoProdutos">
+            <div class="barra-ferramentas">
+                <div>
+                    <h2>Produtos disponíveis</h2>
+                    <p style="color:rgb(105, 115, 125); font-size: 0.9rem">Escolha uma categoria ou pesquise pelo nome.</p>
+                </div>
+                <div class="categorias" id="listaCategorias"></div>
+            </div>
+            <div class="produtos" id="gradeProdutos"></div>
+        </section>
+        <section class="conteiner secao-oculta" id="secaoMeusPedidos" style="display: none;">
+            <div class="cabecalho-secao-interna">
+                <div>
+                    <h2>Meus pedidos</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Acompanhe seus pedidos registrados no sistema.</p>
+                </div>
+                <button type="button" id="botaoFecharMeusPedidos">Voltar ao catálogo</button>
+            </div>
+            <div id="listaMeusPedidos"></div>
+        </section>
+        <section class="conteiner secao-oculta" id="secaoPainelAdmin" style="display: none;">
+            <div class="cabecalho-secao-interna">
+                <div>
+                    <h2>Painel Administrativo</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Gerenciamento de produtos, estoque e pedidos.</p>
+                </div>
+                <button type="button" id="botaoFecharPainelAdmin">Voltar ao catálogo</button>
+            </div>
+
+            <div class="grade-indicadores" id="gradeIndicadoresAdmin"></div>
+
+            <div class="abas-admin">
+                <button type="button" class="categoria ativa" data-aba-admin="produtos">Produtos</button>
+                <button type="button" class="categoria" data-aba-admin="estoque">Estoque e Movimentações</button>
+                <button type="button" class="categoria" data-aba-admin="pedidos">Todos os Pedidos</button>
+            </div>
+
+            <div id="painelAbaProdutos" class="conteudo-aba-admin">
+                <form id="formNovoProduto" class="formulario-admin">
+                    <h3>Cadastrar novo produto</h3>
+                    <div class="linha-campos-admin">
+                        <input type="text" id="novoProdNome" placeholder="Nome do produto" required>
+                        <select id="novoProdCategoria" required></select>
+                        <input type="number" id="novoProdPreco" step="0.01" min="0" placeholder="Preço (R$)" required>
+                        <input type="number" id="novoProdEstoque" min="0" placeholder="Estoque inicial" required>
+                        <div class="campo-imagem-prefixo">
+                            <span>imagens/</span>
+                            <input type="text" id="novoProdImagem" placeholder="arquivo.png">
+                        </div>
+                    </div>
+                    <div class="caixa-previsualizacao">
+                        <img id="previewNovoProduto" src="imagens/ilu1.png" alt="Pré-visualização do produto">
+                        <span id="legendaPreviewNovo">Caminho final: imagens/ilu1.png</span>
+                    </div>
+                    <button type="submit" class="botao-primario">Cadastrar produto</button>
+                </form>
+                <div id="tabelaProdutosAdmin"></div>
+            </div>
+
+            <div id="painelAbaEstoque" class="conteudo-aba-admin" style="display: none;">
+                <form id="formMovimentacaoEstoque" class="formulario-admin">
+                    <h3>Registrar movimentação de estoque</h3>
+                    <div class="linha-campos-admin">
+                        <select id="movProdCodigo" required></select>
+                        <select id="movTipo" required>
+                            <option value="entrada">Entrada (reposição)</option>
+                            <option value="saida">Saída administrativa</option>
+                            <option value="ajuste">Ajuste de inventário (novo saldo)</option>
+                        </select>
+                        <input type="number" id="movQuantidade" min="0" placeholder="Quantidade / Novo saldo" required>
+                        <input type="text" id="movMotivo" placeholder="Motivo da movimentação" required>
+                    </div>
+                    <button type="submit" class="botao-primario">Registrar movimentação</button>
+                </form>
+                <h3>Histórico de movimentações</h3>
+                <div id="tabelaMovimentacoesAdmin"></div>
+            </div>
+
+            <div id="painelAbaPedidos" class="conteudo-aba-admin" style="display: none;">
+                <div id="listaPedidosAdmin"></div>
+            </div>
+        </section>
+        <div class="modulo" id="moduloEditarProduto">
+            <div class="caixa-modulo">
+                <div class="cabecalho-modulo">
+                    <h2>Editar produto</h2>
+                    <button type="button" class="botao-fechar" id="botaoFecharEditarProduto">×</button>
+                </div>
+                <form id="formEditarProduto" class="formulario-admin">
+                    <input type="hidden" id="editProdCodigo">
+                    <label>Nome</label>
+                    <input type="text" id="editProdNome" required>
+                    <label>Categoria</label>
+                    <select id="editProdCategoria" required></select>
+                    <label>Preço (R$)</label>
+                    <input type="number" id="editProdPreco" step="0.01" min="0" required>
+                    <label>Imagem</label>
+                    <div class="campo-imagem-prefixo">
+                        <span>imagens/</span>
+                        <input type="text" id="editProdImagem" placeholder="arquivo.png">
+                    </div>
+                    <div class="caixa-previsualizacao">
+                        <img id="previewEditarProduto" src="" alt="Pré-visualização da imagem">
+                        <span id="legendaPreviewEditar"></span>
+                    </div>
+                    <button type="submit" class="botao-finalizar">Salvar alterações</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="rodape">E-commerce RubiGamer • Projeto acadêmico de Ciência da Computação na disciplina de Programação Web • Compra meramente simulada</footer>
+    <div class="sobreposicao" id="fundoSobreposicaoCarrinho">
+        <aside class="gaveta">
+            <div class="cabecalho-gaveta">
+                <div>
+                    <h2>Seu carrinho</h2>
+                    <p id="subtituloCarrinho" style="color:rgb(105, 115, 125); font-size: 0.84rem">0 itens</p>
+                </div>
+                <button class="botao-fechar" id="botaoFecharCarrinho" aria-label="Fechar carrinho">×</button>
+            </div>
+            <div class="itens-carrinho" id="listaItensCarrinho"></div>
+            <div class="resumo-valores">
+                <div class="linha-resumo"><span>Itens</span><strong id="quantidadeTotalItens">0</strong></div>
+                <div class="linha-resumo"><span>Subtotal</span><strong id="valorSubtotal">R$ 0,00</strong></div>
+                <div class="linha-resumo desconto"><span>Desconto</span><strong id="valorDesconto">R$ 0,00</strong></div>
+                <div class="linha-resumo total"><span>Total</span><strong id="valorTotalFinal">R$ 0,00</strong></div>
+                <button class="botao-finalizar" id="botaoFinalizarCompra">Finalizar compra</button>
+            </div>
+        </aside>
+    </div>
+    <div class="modulo" id="moduloFinalizacaoCompra">
+        <div class="caixa-modulo">
+            <div class="cabecalho-modulo">
+                <h2>Resumo da compra</h2>
+                <button class="botao-fechar" id="botaoFecharModulo">×</button>
+            </div>
+            <div id="conteudoModuloFinalizacao"></div>
+        </div>
+    </div>
+    <div class="notificacao" id="elementoNotificacao"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
